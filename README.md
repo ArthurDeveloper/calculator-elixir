@@ -1,4 +1,4 @@
-# Calcudora
+# Calculadora
 
 - Uma calculadora escrita em elixir para estudos
 
