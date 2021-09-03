@@ -1,50 +1,19 @@
 defmodule Calculator do
+  alias Calculator.Operations
 
-  def main() do
-    {n1, ""} = str_to_int(IO.gets("Digite um número: ")
-                          |> String.replace("\r", "")
-                          |> String.replace("\n", ""))
-    {n2, ""} = str_to_int(IO.gets("Digite outro número: ")
-                          |> String.replace("\r", "")
-                          |> String.replace("\n", "")
-                          )
-
-    IO.puts("A soma entre #{n1} e #{n2} é igual a #{sum(n1, n2)}")
-    IO.puts("A diferença entre #{n1} e #{n2} é igual a #{subtract(n1, n2)}")
-    IO.puts("O produto entre #{n1} e #{n2} é igual a #{multiply(n1, n2)}")
-    IO.puts("O quociente entre #{n1} e #{n2} é igual a #{divide(n1, n2)}")
-    IO.puts("A potência entre #{n1} e #{n2} é igual a #{pow(n1, n2)}")
-    IO.puts("A raiz quadrada de #{n1} é #{sqrt(n1)} e a raiz quadrada de " <>
-            "#{n2} é igual a #{sqrt(n2)}")
-
+  def main(%{value1: n1, signal: signal, value2: n2}) do
+    perform(n1, signal, n2)
   end
 
-  defp str_to_int(string) do
-    Integer.parse(string)
+  defp perform(n1, signal, n2) do
+    case signal do
+      "+" -> IO.puts("The sum is #{Operations.sum(n1,n2)}")
+      "-" -> IO.puts("The subtraction is #{Operations.subtract(n1,n2)}")
+      "/" -> IO.puts("The divide is #{Operations.divide(n1,n2)}")
+      "*" -> IO.puts("The multply is #{Operations.multiply(n1,n2)}")
+      "**" -> IO.puts("The pow is #{Operations.pow(n1,n2)}")
+      "v" -> IO.puts("The square root is #{Operations.sqrt(n1)}")
+      _ -> {:error, "Invalid operator"}
+    end
   end
-
-  defp sum(a, b) do
-    a + b
-  end
-
-  defp subtract(a, b) do
-    a - b
-  end
-
-  defp multiply(a, b) do
-    a * b
-  end
-
-  defp divide(a, b) do
-    a / b
-  end
-
-  defp pow(a, b) do
-    :math.pow(a, b)
-  end
-
-  defp sqrt(a) do
-    :math.sqrt(a)
-  end
-
 end
